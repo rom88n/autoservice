@@ -1,0 +1,97 @@
+version: "3.4"
+
+services:
+  medic-app:
+    hostname: medic-app
+    container_name: medic-app
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
+    env_file:
+      - api/.env
+    command: sh -c "npm run start"
+    environment:
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_HOSTNAME=db
+      - MONGO_PORT=${MONGO_PORT}
+      - MONGO_DB=${MONGO_DB}
+      - REDIS_URL=redis
+    ports:
+      - "3030:3030"
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./api:/srv:cached
+
+  medic-frontend:
+    hostname: medic-frontend
+    container_name: medic-frontend
+    command: sh -c "npm run dev"
+    build:
+      context: ./client
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      BACKEND_HTTP_API_ENDPOINT: http://medic-app:3030
+    volumes:
+      - ./client/src:/srv/src:cached
+      - ./client/node_modules/
+#      - /client/.next
+    depends_on:
+      - medic-app
+    networks:
+      - frontend
+
+  db:
+    container_name: medic_db
+    image: mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: medic-app
+      MONGO_INITDB_ROOT_USERNAME: medicuser
+      MONGO_INITDB_ROOT_PASSWORD: 12345678
+    networks:
+      - backend
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo db:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./api/docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - mongodb_data_container:/data/db
+    ports:
+      - "27017-27019:27017-27019"
+
+  redis:
+    container_name: medic-redis
+    hostname: medic-redis
+    image: bitnami/redis
+    networks:
+      - backend
+    environment:
+      - REDIS_PASSWORD=123123
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 30s
+      retries: 10
+    ports:
+      - "6379:6379"
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+
+volumes:
+  mongodb_data_container:

@@ -21,7 +21,7 @@ module.exports = withImages({
         destination: `http://${process.env.API_HOST}/admin/:path*`
       },
       {
-        source: `${process.env.API_PATH}/:path*`,
+        source: `/${process.env.API_PATH}/:path*`,
         destination: `http://${process.env.API_HOST}/${process.env.API_PATH}/:path*`
       }
     ];

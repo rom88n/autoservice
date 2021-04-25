@@ -47,7 +47,7 @@ export const TableComponent = memo((props) => {
   const router = useRouter()
   const tableConfig = useSelector(store => store.tableConfig)
 
-  const { selected, data, page, search, total, limit } = tableConfig
+  const { selected, data, page, search, total, limit, loading } = tableConfig
 
   const fetchData = async () => {
     // eslint-disable-next-line no-return-await
@@ -113,6 +113,7 @@ export const TableComponent = memo((props) => {
       </div>
       <DataGrid
         disableSelectionOnClick
+        loading={loading}
         rowCount={total}
         rows={data}
         columns={columns}
@@ -126,6 +127,7 @@ export const TableComponent = memo((props) => {
         onSelectionModelChange={onRowSelected}
         paginationMode="server"
         localeText={{
+          noRowsLabel: 'Нет данных',
           footerRowSelected: (count) => `Выбрано строк: ${count.toLocaleString()}`,
         }}
         {...rest}

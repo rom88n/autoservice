@@ -18,7 +18,7 @@ export function createApolloClient() {
   return new ApolloClient({
     ssrMode: false,
     link: new HttpLink({
-      uri: `http://${process.env.HOST_URL}${process.env.API_PATH}`,
+      uri: `http://${process.env.HOST_URL}/${process.env.API_PATH}`,
       credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
       fetch
     }),

@@ -4,10 +4,7 @@ const moment = require('moment');
 module.exports = async function(obj, args, context, info, extra) {
   const { startDate, endDate } = args
   const { listAdapters: { Order } } = adapter
-  console.log('args', {
-    startDate: startDate,
-    endDate: endDate,
-  })
+
   const orders = await Order.model
     .find({
       createdAt_utc: {
@@ -26,6 +23,6 @@ module.exports = async function(obj, args, context, info, extra) {
       endDate: moment(item.createdAt_utc).add(1, 'days').startOf('day').format('YYYY-MM-DD hh:mm A'),
     }
   ))
-  console.log('result', result)
+
   return { result }
 }

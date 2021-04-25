@@ -7,7 +7,7 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 const port = 3000;
 
-const apiUrl = `http://${process.env.API_HOST}${process.env.API_PATH}`;
+const apiUrl = `http://${process.env.API_HOST}/${process.env.API_PATH}`;
 
 app
   .prepare()
@@ -21,7 +21,7 @@ app
     server.get('*', (req, res) => {
       return handle(req, res);
     });
-    console.log(apiUrl);
+
     // Proxy to api server
     server.use('/api', (req, res) => {
       proxy.web(req, res, { target: apiUrl })
