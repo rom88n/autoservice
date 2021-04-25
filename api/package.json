@@ -1,0 +1,32 @@
+{
+  "name": "backend",
+  "private": true,
+  "versiom": "0.1.0",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true PORT=3030 keystone dev",
+    "build": "cross-env NODE_ENV=production PORT=3030 keystone build",
+    "start": "cross-env NODE_ENV=production PORT=3030 keystone start",
+    "create-tables": "cross-env CREATE_TABLES=true keystone create-tables"
+  },
+  "dependencies": {
+    "@keystonejs/adapter-mongoose": "^10.1.1",
+    "@keystonejs/apollo-helpers": "^5.1.8",
+    "@keystonejs/app-admin-ui": "^7.3.12",
+    "@keystonejs/app-graphql": "6.2.0",
+    "@keystonejs/app-next": "^5.2.3",
+    "@keystonejs/auth-password": "^6.0.0",
+    "@keystonejs/field-content": "^8.0.0",
+    "@keystonejs/fields": "^21.0.0",
+    "@keystonejs/keystone": "^18.0.0",
+    "@keystonejs/list-plugins": "^7.1.5",
+    "@keystonejs/server-side-graphql-client": "^1.1.2",
+    "apollo-server-express": "^2.22.2",
+    "cross-env": "5.2.0",
+    "dotenv": "4.0.0",
+    "moment": "^2.29.1"
+  }
+}
