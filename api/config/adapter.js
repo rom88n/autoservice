@@ -15,4 +15,5 @@ const mongoUri = NODE_ENV === 'development'
 
 module.exports = new Adapter({
   mongoUri
-})
+});
+

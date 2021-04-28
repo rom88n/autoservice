@@ -7,7 +7,7 @@ WORKDIR /frontend
 
 COPY package*.json ./
 
-RUN yarn install --production
+RUN npm install --production
 COPY . .
 
 EXPOSE 3000

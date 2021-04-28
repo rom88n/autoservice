@@ -3,5 +3,6 @@ node_modules
 styles
 .idea
 .env
+dist
 .dist/*
 src/.next

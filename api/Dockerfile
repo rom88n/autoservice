@@ -9,6 +9,8 @@ COPY package*.json ./
 
 COPY . .
 
-RUN yarn install && yarn build
+RUN npm install && npm run build
+
+HEALTHCHECK CMD curl --fail http://localhost:3030 || exit 1
 
 EXPOSE 3030

@@ -12,8 +12,8 @@ module.exports = withImages({
     return config
   },
   async rewrites() {
-    await fetch(`http://${process.env.API_HOST}`)
-      .catch(() => process.exit(1));
+    // await fetch(`http://${process.env.API_HOST}`)
+    //   .catch(() => process.exit(1));
 
     return [
       {
