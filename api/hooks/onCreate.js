@@ -5,8 +5,7 @@
 //
 //   const user = await User.findOne({ id: resolvedData.user });
 //
-//   if (resolvedData.amount > user.cash) throw new Error('Нехватает средств на счету');
-//   await User.update(user.id, { cash: user.cash - resolvedData.amount });
+//   await User.update(user.id, {  });
 //
 //   return resolvedData;
 // };
