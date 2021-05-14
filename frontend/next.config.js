@@ -11,21 +11,21 @@ module.exports = withImages({
     }
     return config
   },
-  async rewrites() {
+  // async rewrites() {
     // await fetch(`http://${process.env.API_HOST}`)
     //   .catch(() => process.exit(1));
 
-    return [
-      {
-        source: '/admin/:path*',
-        destination: `http://${process.env.API_HOST}/admin/:path*`
-      },
-      {
-        source: `/${process.env.API_PATH}/:path*`,
-        destination: `http://${process.env.API_HOST}/${process.env.API_PATH}/:path*`
-      }
-    ];
-  },
+    // return [
+    //   {
+    //     source: '/admin/:path*',
+    //     destination: `http://${process.env.API_HOST}/admin/:path*`
+    //   },
+    //   {
+    //     source: `/${process.env.API_PATH}/:path*`,
+    //     destination: `http://${process.env.API_HOST}/${process.env.API_PATH}/:path*`
+    //   }
+    // ];
+  // },
   env: {
     'API_HOST': process.env.API_HOST,
     'HOST_URL': process.env.HOST_URL,
