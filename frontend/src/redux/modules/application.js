@@ -47,6 +47,7 @@ export function loggingIn(data, { setSubmitting }) {
           type: SET_USER,
           payload: { ...authenticateUserWithPassword.item, token: authenticateUserWithPassword.token }
         });
+        localStorage.setItem('authToken', authenticateUserWithPassword.token)
         history.replace({ pathname: '/dashboard' })
       })
       .catch((er) => {
@@ -64,6 +65,7 @@ export const logoutUser = () => {
       const { data: { unauthenticate } } = result
 
       if (unauthenticate.success) {
+        localStorage.removeItem('authToken')
         history.replace({ pathname: '/login' })
         dispatch({
           type: SET_USER,
@@ -87,6 +89,7 @@ export const validateUser = () => {
       const { data: { authenticatedUser } } = result;
 
       if (!authenticatedUser) {
+        localStorage.removeItem('authToken')
         history.replace({ pathname: '/login' })
         await dispatch({
           type: SET_USER,

@@ -1,7 +1,5 @@
-import { ApolloClient } from 'apollo-client';
-import { HttpLink } from 'apollo-link-http';
+import { ApolloClient, HttpLink, ApolloLink, InMemoryCache, concat } from '@apollo/client';
 import fetch from 'isomorphic-unfetch';
-import { InMemoryCache } from 'apollo-cache-inmemory'
 
 const defaultOptions = {
   watchQuery: {
@@ -14,14 +12,23 @@ const defaultOptions = {
   }
 };
 
+const httpLink = new HttpLink({ uri: `http://${process.env.API_HOST}/${process.env.API_PATH}` });
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  // add the authorization to the headers
+  operation.setContext({
+    headers: {
+      authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    }
+  });
+
+  return forward(operation);
+});
+
 export function createApolloClient() {
   return new ApolloClient({
     ssrMode: false,
-    link: new HttpLink({
-      uri: `http://${process.env.API_HOST}/${process.env.API_PATH}`,
-      credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-      fetch
-    }),
+    link: concat(authMiddleware, httpLink),
     fetchOptions: {
       mode: 'no-cors',
     },

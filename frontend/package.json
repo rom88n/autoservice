@@ -9,7 +9,7 @@
     "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.12",
+    "@apollo/client": "^3.3.19",
     "@devexpress/dx-react-core": "^2.7.5",
     "@devexpress/dx-react-scheduler": "^2.7.5",
     "@devexpress/dx-react-scheduler-material-ui": "^2.7.5",
