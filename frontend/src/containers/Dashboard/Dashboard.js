@@ -65,6 +65,15 @@ const columns = [
     headerAlign: 'center',
     width: 400
   },
+  {
+    field: 'cost',
+    headerName: 'Цена',
+    sortable: false,
+    align: 'center',
+    headerAlign: 'center',
+    valueFormatter: ({ value }) => `${value} грн.`,
+    width: 400
+  },
 ];
 
 export const Dashboard = () => {

@@ -44,13 +44,24 @@ export const getFormData = ({ query, dataPath, variables }) => {
   };
 };
 
-export const submitFormData = ({ query, dataPath, variables, values, onSuccess }, helpers) => {
+export const submitFormData = ({ query, dataPath, variables, values, connectUser, onSuccess }, helpers) => {
   return async (dispatch, getState, { client, history }) => {
     try {
+      const user = getState().application.user
       helpers.setSubmitting(true);
       const res = await client.mutate({
         mutation: query,
-        variables: { ...variables, data: omit(values, ['id', '__typename', 'createdAt', 'updatedAt']) }
+        variables: {
+          ...variables,
+          data: {
+            ...omit(values, ['id', '__typename', 'createdAt', 'updatedAt', 'user']),
+            ...(connectUser && {
+              user: {
+                connect: { id: user.id },
+              }
+            })
+          }
+        }
       });
 
       if (get(res, `data.${dataPath}`)) {

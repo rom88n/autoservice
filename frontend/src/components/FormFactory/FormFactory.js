@@ -147,7 +147,8 @@ export const FormFactory = ({ getValuesParams, fields, submitParams, ...rest }) 
 FormFactory.propTypes = {
   fields: PropTypes.array.isRequired,
   submitParams: PropTypes.object,
-  getValuesParams: PropTypes.object
+  getValuesParams: PropTypes.object,
+  connectUser: PropTypes.bool
 };
 
 FormFactory.defaultProps = {

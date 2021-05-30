@@ -23,29 +23,16 @@ export default [
     className: 'col-sm-4',
     formatting: (value) => parseInt(value, 10),
     type: 'number',
-    label: 'Пробег',
+    label: 'Пробег (тис. км)',
     variant: 'outlined'
   },
   {
-    name: 'engineNumber',
+    name: 'bodyNumber',
     component: TextField,
     className: 'col-sm-4',
-    label: 'Номер двигателя',
+    label: 'Номер кузова',
     variant: 'outlined'
   },
-  // {
-  //   name: 'transmission',
-  //   component: SelectComponent,
-  //   className: 'col-sm-4',
-  //   componentProps: {
-  //     items: [
-  //       { value: 'automatic', name: labels.automatic },
-  //       { value: 'manual', name: labels.manual }
-  //     ],
-  //     label: labels.transmission,
-  //     variant: 'outlined'
-  //   }
-  // },
   {
     name: 'transmission',
     component: SelectComponent,

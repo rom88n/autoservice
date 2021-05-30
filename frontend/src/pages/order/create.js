@@ -14,12 +14,13 @@ const createOrder = () => {
   return (
     <>
       <Head>
-        <title>Редактирование заказа</title>
+        <title>Создать заказа</title>
       </Head>
       <FormFactory
         title="Создать заказ"
         fields={orderFormData}
         submitParams={{
+          connectUser: true,
           query: ORDER_CREATE,
           onSuccess,
           dataPath: 'createOrder',

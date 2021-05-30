@@ -20,6 +20,7 @@ export const GET_ORDERS = gql`
         customerName
         customerPhone
         governmentNumber
+        bodyNumber
         engineSize
         transmission
         mileage
@@ -62,6 +63,7 @@ export const ORDER_BY_ID = gql`
        customerName
        customerPhone
        governmentNumber
+       bodyNumber
        engineSize
        transmission
        mileage
@@ -85,6 +87,7 @@ export const ORDER_UPDATE = gql`
      customerName
      customerPhone
      governmentNumber
+     bodyNumber
      engineSize
      transmission
      mileage
@@ -105,6 +108,7 @@ export const ORDER_CREATE = gql`
    customerName
    customerPhone
    governmentNumber
+   bodyNumber
    engineSize
    transmission
    mileage
