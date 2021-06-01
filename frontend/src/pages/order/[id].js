@@ -36,7 +36,7 @@ const orderById = () => {
       <FormFactory
         withCreatedDate
         disabled={hasPermission}
-        title="Редактировать заказ"
+        title="Редактирование заказа"
         fields={orderFormData}
         submitParams={{
           onSuccess,

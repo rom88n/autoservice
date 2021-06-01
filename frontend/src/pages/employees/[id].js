@@ -30,10 +30,10 @@ const userById = () => {
   return (
     <>
       <Head>
-        <title>Редактировать пользователь</title>
+        <title>Редактирование пользователь</title>
       </Head>
       <FormFactory
-        title="Редактировать пользователя"
+        title="Редактирование пользователя"
         fields={userFormData}
         disabled={hasPermission}
         submitParams={{
